@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 
 public class LevelManager : MonoBehaviour
@@ -16,9 +17,15 @@ public class LevelManager : MonoBehaviour
 
     public GameObject[] bricksArr;
     public Transform[] planeArr;
+    public GameObject bridgeBricks;
+    public Transform bridge1, bridge2, bridge3;
 
     [SerializeField] private Vector3 rootPos1 = new Vector3(0, 0, 0);
     [SerializeField] private Vector3 rootPos2 = new Vector3(0, 5, 54);
+    List<Vector3> takenBrickList = new List<Vector3>();
+    List<int> takenColor = new List<int>();
+    public Transform bridgeHolder;
+
     private void Awake()
     {
         instance = this;
@@ -28,6 +35,20 @@ public class LevelManager : MonoBehaviour
         List<int> myList = GenerateArray();
         BrickRender(rootPos1, planeArr[0], myList);
         BrickRender(rootPos2, planeArr[1], myList);
+        SpawnBridge(bridge1.position);
+        SpawnBridge(bridge2.position);
+        SpawnBridge(bridge3.position);
+    }
+
+    private void SpawnBridge(Vector3 pos)
+    {
+        bridgeHolder = new GameObject().transform;
+        for (int i = 0; i < 20; i++)
+        {
+            Instantiate(bridgeBricks, pos, Quaternion.identity, bridgeHolder);
+            pos.y += 1;
+            pos.z += 2;
+        }
     }
 
     private void BrickRender(Vector3 roootPos, Transform Parent, List<int> myList)
