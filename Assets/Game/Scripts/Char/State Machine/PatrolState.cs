@@ -9,7 +9,7 @@ public class PatrolState : IState<Bot>
 
     public void OnEnter(Bot t)
     {
-        t.ChangeAnim("run");                                            // Đổi sang Animation Run
+        t.ChangeAnim(Character.runAnim);                                            // Đổi sang Animation Run
         targetBrick = Random.Range(2, 5);                               // Tạo ra số lượng viên gạch muốn kiếm random
         //Debug.Log(targetBrick);
         SeekTarget(t);                                                  // Bắt đầu tìm gạch

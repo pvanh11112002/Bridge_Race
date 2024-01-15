@@ -1,7 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+// Xem chi tiết trong ReadMe2.txt
 public enum GameState
 {
     MainMenu,
@@ -10,7 +10,10 @@ public enum GameState
 }
 public class GameManager : Singleton<GameManager>
 {
+    #region Khai  báo
     private GameState gameState;
+    #endregion
+
     private void Start()
     {
         ChangeState(GameState.MainMenu);

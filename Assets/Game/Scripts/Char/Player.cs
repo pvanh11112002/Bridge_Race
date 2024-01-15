@@ -33,11 +33,11 @@ public class Player : Character
                 transform.position = CheckGround(nextPoint);
                 if (dir != new Vector3(0, 0, 0)) // Nếu có input thì sẽ có hướng, không có input thì dir = 0,0,0, dựa vào đó thay đổi animation
                 {
-                    ChangeAnim("run");
+                    ChangeAnim(runAnim);
                 }
                 else
                 {
-                    ChangeAnim("idle");
+                    ChangeAnim(idleAnim);
                 }                
             }
 

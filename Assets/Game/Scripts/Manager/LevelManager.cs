@@ -5,26 +5,28 @@ using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager>
 {
-    readonly List<ColorType> colorTypes = new List<ColorType>() { ColorType.Red, ColorType.Green, ColorType.Blue, ColorType.Yellow };
+    #region Khai báo
+    //Tạo một List chứa các giá trị của ColorType, List này là biến kiểu chỉ đọc
+    readonly List<ColorType> colorTypes = new List<ColorType>() { ColorType.Red, ColorType.Green, ColorType.Blue, ColorType.Yellow };   
     public Level[] levelPrefabs;
     public Bot botPrefab;
     public Player player;
-
-    private Level currentLevel;
-    public Vector3 FinishPoint => currentLevel.finishPoint.position;
+    public Vector3 FinishPoint => currentLevel.finishPoint.position; // ký hiệu "=>" cũng là định nghĩa thuộc tính chỉ đọc
     public int CharAmount => currentLevel.botAmount + 1;
-
-
+    private Level currentLevel;   
     private List<Bot> bots = new List<Bot>();
+    #endregion
+
+
     private void Start()
     {
         LoadLevel(0);
         OnInit();
-        UIManager.Instance.OpenUI<MainMenu>();// Gọi lên thằng main menu
+        UIManager.Instance.OpenUI<MainMenu>();                      // Gọi lên thằng main menu
     }
     public void OnInit()
     {
-        //Khoi tao vi tri bat dau game
+        // Khởi tạo các vị trí bắt đầu của game
         Vector3 index = currentLevel.startPoint.position;
         float space = 3f;       
         Vector3 firstLeftPoint = ((CharAmount / 2) + (CharAmount % 2) * 0.5f - 0.5f) * space * Vector3.left + index;
@@ -34,17 +36,17 @@ public class LevelManager : Singleton<LevelManager>
             startPoints.Add(firstLeftPoint + space * Vector3.right * i);           
         }
         
-        //Random Color
-        //LinQ
+        // Tạo ra một anh sách mơi đã được sắp xếp từ colorTypes theo số lượng charamount
+        // LinQ
         List<ColorType> colorDatas = Utilities.SortOrder(colorTypes, CharAmount);
         
-        //Set player's position
+        // Đặt vị trí của người chơi
         int rand = Random.Range(0, CharAmount);
         player.transform.position = startPoints[rand];       
         player.transform.rotation = Quaternion.identity;
         startPoints.RemoveAt(rand);
 
-        //Set player's color
+        // Tô màu cho người chơi và bot
         player.ChangeColor(colorDatas[rand]);
         colorDatas.RemoveAt(rand);
         player.OnInit();
@@ -73,6 +75,7 @@ public class LevelManager : Singleton<LevelManager>
             //level limit
         }
     }
+    // Logic của các chức năng nút
     public void OnStartGame()
     {
         GameManager.Instance.ChangeState(GameState.GamePlay);

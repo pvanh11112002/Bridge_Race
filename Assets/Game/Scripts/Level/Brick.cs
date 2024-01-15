@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Brick : ColorObj
 {
+    #region Khai Báo
+    [HideInInspector] public Stage stage;
+    #endregion
+
     //private void Start()
     //{
     //    ChangeColor((ColorType)Random.Range(1, 5));
     //}
-    [HideInInspector] public Stage stage;
+
     public void OnDespawn()
     {
         stage.RemoveBrick(this);

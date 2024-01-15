@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+// Cái này là nháp 
 public class DraftCode : MonoBehaviour
 {
+    #region Khai báo
+    [SerializeField] private LayerMask groundLayer;
     public float speed ;
     public FloatingJoystick variableJoystick;
     public Animator anim;
-    public Vector3 dir;
-    [SerializeField] private LayerMask groundLayer;
+    public Vector3 dir;  
     private string currentAnim;
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {

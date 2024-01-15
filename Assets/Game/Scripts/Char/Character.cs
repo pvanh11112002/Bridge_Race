@@ -12,6 +12,8 @@ public class Character : ColorObj
     [HideInInspector]public Stage stage;
     public Vector3 dir;
     public Animator anim;
+    public static string idleAnim = "idle";
+    public static string runAnim = "run";
     private string currentAnim;
     private List<PlayerBricks> playerBricks = new List<PlayerBricks>();
     #endregion

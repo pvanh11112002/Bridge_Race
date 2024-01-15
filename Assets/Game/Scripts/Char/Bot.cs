@@ -28,7 +28,7 @@ public class Bot : Character
     public override void OnInit()
     {
         base.OnInit();
-        ChangeAnim("idle");
+        ChangeAnim(idleAnim);
     }    
 
 
